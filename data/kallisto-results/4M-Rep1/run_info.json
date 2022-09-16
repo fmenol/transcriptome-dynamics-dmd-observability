@@ -1,0 +1,13 @@
+{
+	"n_targets": 6009,
+	"n_bootstraps": 0,
+	"n_processed": 17438533,
+	"n_pseudoaligned": 4436721,
+	"n_unique": 4433864,
+	"p_pseudoaligned": 25.4,
+	"p_unique": 25.4,
+	"kallisto_version": "0.46.2",
+	"index_version": 10,
+	"start_time": "Mon Feb  1 11:13:17 2021",
+	"call": "kallisto quant -i GCA_000009225.1_ASM922v1_cds_from_genomic.index -o results-kallisto-trimmed/4M-Rep1_S16 -t 6 results-trimmomatic/4M-Rep1_S16_R1_paired.fastq.gz results-trimmomatic/4M-Rep1_S16_R2_paired.fastq.gz"
+}

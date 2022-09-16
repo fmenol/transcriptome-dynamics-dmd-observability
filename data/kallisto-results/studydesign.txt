@@ -1,0 +1,45 @@
+sample	group
+3-Rep1	control03
+3-Rep3	control03
+3M-Rep1	malathion03
+3M-Rep3	malathion03
+4-Rep1	control04
+4-Rep3	control04
+4M-Rep1	malathion04
+4M-Rep3	malathion04
+5-Rep1	control05
+5-Rep3	control05
+5M-Rep1	malathion05
+5M-Rep3	malathion05
+6-Rep1	control06
+6-Rep3	control06
+6M-Rep1	malathion06
+6M-Rep3	malathion06
+7-Rep1	control07
+7-Rep3	control07
+7M-Rep1	malathion07
+7M-Rep3	malathion07
+8-Rep1	control08
+8-Rep3	control08
+8M-Rep1	malathion08
+8M-Rep3	malathion08
+9-Rep1	control09
+9-Rep3	control09
+9M-Rep1	malathion09
+9M-Rep3	malathion09
+10-Rep1	control10
+10-Rep3	control10
+10M-Rep1	malathion10
+10M-Rep3	malathion10
+11-Rep1	control11
+11-Rep3	control11
+11M-Rep1	malathion11
+11M-Rep3	malathion11
+
+
+
+
+
+
+
+
