@@ -141,7 +141,7 @@ def gram_matrix(A,x0,nT=50,reduced=True,projection_matrix=np.array([])):
     x0: initial conditions from measurements
     nT: number of timepoints over which to compute the Gram matrix
     reduced: if True, will compute reduced G from reduced data and KO and will also return full G after inverse projection
-    projection_matrix: the matrix used to data and KO to low-dimensional space (first r eigenvectors of Data.T @ Data)
+    projection_matrix: the matrix used to project data and KO to low-dimensional space (first r eigenvectors of Data.T @ Data)
     Both A and x0 can be either the full dimensional data and KO or they can be the DMD projected data and KO
     If projected, then return both the projected G and the full G after inverting the projection
     If not projected, then compute full G (can be slow, especially if the data dimension exceeds a couple thousand)
@@ -159,6 +159,7 @@ def gram_matrix(A,x0,nT=50,reduced=True,projection_matrix=np.array([])):
     for ii in range(x0.shape[1],x0uni.shape[1]):
         x0tmp = np.random.uniform(x0min,x0max)
         x0uni[:,ii] = x0tmp
+
     G = np.zeros_like(A)
     for ii in range(nT):
         A_pow = np.linalg.matrix_power(A,ii)
@@ -192,6 +193,43 @@ def finite_horizon_obs_gramian(A,C,nT):
     Xo_proj = np.matmul(np.matmul(U[:,0:3].T,Xo),U[:,0:3])
     return Xo,Xo_proj
 
+def obs_sums(A,C,nT):
+    O = np.zeros_like(C)
+    for ii in range(nT):
+        O += C @ np.linalg.matrix_power(A,ii)
+    return O
+
+def gen_block_lin_sys(N_blocks=1,N_vars_per_block=45,Ai_min=1,Ai_max=3,Ai_thres=10,N_initial_conditions=8,
+                     x0_mean=0.4,x0_std=0.2):
+    '''
+    written by Shara Balakrishnan 10/25/2022
+    N_blocks:
+    N_vars_per_block:
+    Ai_mean:
+    Ai_std:
+    N_initial_conditions:
+    x0_mean:
+    x0_std:
+    '''
+
+    A_sorted = np.zeros((N_blocks*N_vars_per_block,N_blocks*N_vars_per_block))
+    for ii in range(N_blocks):
+#         Ai = np.random.normal(Ai_mean, Ai_std, (N_vars_per_block, N_vars_per_block))
+        Ai = np.random.uniform(Ai_min, Ai_max, (N_vars_per_block, N_vars_per_block))
+        Ai[np.abs(Ai)>Ai_thres]=0
+        A_sorted[ii*N_vars_per_block:(ii+1)*N_vars_per_block,ii*N_vars_per_block:(ii+1)*N_vars_per_block] = Ai   
+
+    # Generate random ics
+    xdim = N_blocks*N_vars_per_block
+    x0 = np.random.normal(x0_mean,x0_std,( xdim, N_initial_conditions))
+    
+    
+    if np.abs(np.linalg.eigvals(A_sorted)).max() <= 1.0 :
+        print(f'stable system of dim {xdim} generated')
+    else: 
+        print(f'unstable system of dim {xdim} generated')
+    
+    return A_sorted, x0
 
 
 
