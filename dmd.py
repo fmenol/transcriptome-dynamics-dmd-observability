@@ -81,7 +81,7 @@ def dmd(data,rank_reduce=True,r=None,trim=False,trimThresh=1.5e-3):
     data_red[:,:,0] = np.dot(U_r.T ,data[:,:,0])
     data_red[:,:,1] = np.dot(U_r.T ,data[:,:,1])
     X_pred_red, cd_red = n_step_prediction(Atilde,data_red,data_red.shape[1],data_red.shape[2])
-    _, cd = n_step_prediction(A,data,data.shape[1],data.shape[2])
+#     _, cd = n_step_prediction(A,data,data.shape[1],data.shape[2])
 
     X_pred_red = X_pred_red.reshape(len(data_red),data_red.shape[1],data_red.shape[2])
     
@@ -99,7 +99,7 @@ def dmd(data,rank_reduce=True,r=None,trim=False,trimThresh=1.5e-3):
     b_r0 = np.linalg.inv(np.dot(W,np.diag(L))) @ data_red[:,:,0]
     b_r1 = np.linalg.inv(np.dot(W,np.diag(L))) @ data_red[:,:,1]
 
-    return A, Atilde, data_red, U_r, cd, L, W, Phi, b_r0, b_r1
+    return A, Atilde, data_red, U_r, cd_red, L, W, Phi, b_r0, b_r1
 
 
 

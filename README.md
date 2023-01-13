@@ -36,7 +36,7 @@ The expected run-time for `reporters.ipynb` is 20 minutes if fitting hill functi
 
 The expected run-time for `virtual_sensors.ipynb` is 1 minute.  
 
-
+If any issues are encountered, please contact me at `aqib at u_c_s_b.edu` without the underscores or open an issue on github.
 
 
 
