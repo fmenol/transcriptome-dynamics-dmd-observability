@@ -94,7 +94,7 @@ def process_df(df,sampleLabels,nreps,reps,ntimepts,txIDs,sg_filter=True,standard
 	if sg_filter: 
 		data_c_ds, data_t_ds = smooth_time_series(data_c_ds), smooth_time_series(data_t_ds) 
 		data_c_ds, data_t_ds = recover_negatives(data_c_ds), recover_negatives(data_t_ds)
-	
+
 	data_c, data_t = deepcopy(data_c_ds), deepcopy(data_t_ds) 
 	keepers = get_high_exp_genes(data_c,data_t)
 	data_c_keep, data_t_keep = data_c[keepers], data_t[keepers]
