@@ -86,7 +86,9 @@ def standardize_time_series(data_fc,ntimepts,nreps):
 	return data_fc_norm
 
 def process_df(df,sampleLabels,nreps,reps,ntimepts,txIDs,sg_filter=True,standardize=True):
+	#FM: Split the data in controls (data_c) and treatments (data_t)
 	data_c, data_t = get_groups_from_df(np.array(df),sampleLabels)
+	#FM: arrange the 2 arrays so that genes are on the rows, time pts on the columns and the 3rd dimension is replicates
 	data_c_orig, data_t_orig = put_groups_in_3D(data_c,nreps,ntimepts), put_groups_in_3D(data_t,nreps,ntimepts)
 	#FM: the following line is extracting all the experiments AFTER the introduction of malathion
 	# downselect the timepoints not used in this study
