@@ -90,10 +90,11 @@ def process_df(df,sampleLabels,nreps,reps,ntimepts,txIDs,sg_filter=True,standard
 	data_c, data_t = get_groups_from_df(np.array(df),sampleLabels)
 	#FM: arrange the 2 arrays so that genes are on the rows, time pts on the columns and the 3rd dimension is replicates
 	data_c_orig, data_t_orig = put_groups_in_3D(data_c,nreps,ntimepts), put_groups_in_3D(data_t,nreps,ntimepts)
-	#FM: the following line is extracting all the experiments AFTER the introduction of malathion
 	# downselect the timepoints not used in this study
+	#FM: the following line is extracting all the experiments AFTER the introduction of malathion
 	data_c_ds, data_t_ds = deepcopy(data_c_orig)[:,2:-1,reps], deepcopy(data_t_orig)[:,2:-1,reps]
 	if sg_filter: 
+		#This is applying a Savitzky-Golay (smoothing) filter of order 2 and window 5
 		data_c_ds, data_t_ds = smooth_time_series(data_c_ds), smooth_time_series(data_t_ds) 
 		data_c_ds, data_t_ds = recover_negatives(data_c_ds), recover_negatives(data_t_ds)
 
