@@ -98,12 +98,14 @@ def process_df(df,sampleLabels,nreps,reps,ntimepts,txIDs,sg_filter=True,standard
 		data_c_ds, data_t_ds = smooth_time_series(data_c_ds), smooth_time_series(data_t_ds) 
 		data_c_ds, data_t_ds = recover_negatives(data_c_ds), recover_negatives(data_t_ds)
 
-	data_c, data_t = deepcopy(data_c_ds), deepcopy(data_t_ds) 
+	data_c, data_t = deepcopy(data_c_ds), deepcopy(data_t_ds)
+	#FM: then only the genes with count > 200 (on average) are kept 
 	keepers = get_high_exp_genes(data_c,data_t)
 	data_c_keep, data_t_keep = data_c[keepers], data_t[keepers]
 	txIDs_keep = [txIDs[x] for x in keepers]
 	data_fc = compute_fold_changes(data_c_keep, data_t_keep)
 	if standardize:
+		#FM: this standardises all expression time-series to mean 0 and std 1
 		data_fc_norm = standardize_time_series(data_fc,data_c.shape[1],data_c.shape[2])
 	else: 
 		data_fc_norm = deepcopy(data_fc)
@@ -129,6 +131,15 @@ def process_df(df,sampleLabels,nreps,reps,ntimepts,txIDs,sg_filter=True,standard
 
 # get gene names and locus tags from transcript ID
 def getRecords(fasta_path,genbank_path,transcriptIDs):
+	'''
+	This function takes in input 2 the path to 2 files "fasta_path" and "genbank_path", 
+	as well the transcripts that passed the previous filtering stages and returns 3 arrays
+	
+	genes: contains the names of the genes to keep after filtering
+	locus_tags: contains, for each gene, their locus tags (from the fasta_file)
+	locations: for each gene, keeps a record of its coordinate on the genome and the 
+				strand orientation on which it is found 
+	'''
 	# have to use cds_from_genome.fasta because this is the where the transcriptIDs came from (e.g. lcl|AM181176.4_cds_CAY53368.1_5775)
 	fasta_records = list(SeqIO.parse(fasta_path,'fasta')) # full cds_from_genome fasta
 	keep_fasta_records = [] # getting records of genes that we have used
