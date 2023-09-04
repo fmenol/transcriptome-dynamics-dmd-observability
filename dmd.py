@@ -77,6 +77,7 @@ def dmd(data,rank_reduce=True,r=None,trim=False,trimThresh=1.5e-3):
     # calculate prediction accuracy 
 #     X_pred, cd = n_step_prediction(A,data,data.shape[1],data.shape[2])
 #     X_pred = X_pred.reshape(len(data),data.shape[1],data.shape[2])
+    # The next two lines project the original data (one replicate at a time) onto the top r modes of the system.
     data_red = np.zeros((r,data.shape[1],data.shape[2]))
     data_red[:,:,0] = np.dot(U_r.T ,data[:,:,0])
     data_red[:,:,1] = np.dot(U_r.T ,data[:,:,1])
