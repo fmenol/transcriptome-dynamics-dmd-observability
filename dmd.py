@@ -97,16 +97,10 @@ def dmd(data,rank_reduce=True,r=None,trim=False,trimThresh=1.5e-3):
 #     b_r1 = np.linalg.pinv(Phi) @ data[:,0:1,1]
 #     b_r0 = np.linalg.pinv(Phi) @ X_pred[:,:,0]
 #     b_r1 = np.linalg.pinv(Phi) @ X_pred[:,:,1]
+    
+    # this should be the "initial mode amplitudes" but it looks like it is using matrix ops
+    # to calculate the entire prediction? Also b = V^{-1} z_0, there's no mult by L... 
     b_r0 = np.linalg.inv(np.dot(W,np.diag(L))) @ data_red[:,:,0]
     b_r1 = np.linalg.inv(np.dot(W,np.diag(L))) @ data_red[:,:,1]
 
     return A, Atilde, data_red, U_r, cd_red, L, W, Phi, b_r0, b_r1
-
-
-
-
-
-
-
-
-
