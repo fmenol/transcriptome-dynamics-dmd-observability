@@ -19,7 +19,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "pip3 install --upgrade pip && apt-get -y update && apt-get -y install build-essential cmake --no-install-recommends && pip3 install --user -r requirements.txt",
+	"postCreateCommand": "pip3 install --upgrade pip && apt-get -y update && apt-get -y install build-essential cmake --no-install-recommends && pip3 install --user -r requirements.txt && pip install -U git+https://github.com/sichinaga/PyDMD@mode-sparse-bopdmd",
 // Add the IDs of extensions you want installed when the container is created in the array below.
 		// Configure properties specific to VS Code.
 	"customizations": {
