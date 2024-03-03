@@ -218,3 +218,4 @@ cd = 1 - ((np.linalg.norm(X-X_pred, ord=2))**2)/(np.linalg.norm(X-feature_means,
 X_pred_red = X_pred.reshape(len(data_red), data_red.shape[1], data_red.shape[2])
 
 L,W = np.linalg.eig(Atilde)
+
